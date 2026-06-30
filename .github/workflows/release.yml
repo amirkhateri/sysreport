@@ -3,27 +3,19 @@ name: Release
 on:
   push:
     tags:
-      - "v*"
+      - 'v*'
 
 permissions:
   contents: write
 
 jobs:
   release:
-    name: Build Release
-
     runs-on: ubuntu-latest
 
     steps:
-
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Read Version
-        id: version
+      - name: Read version
         run: |
-          echo "VERSION=$(cat VERSION)" >> $GITHUB_ENV
-
-      - name: Show Version
-        run: |
-          echo "Building version $VERSION"
+          echo "VERSION=$(cat VERSION)"
