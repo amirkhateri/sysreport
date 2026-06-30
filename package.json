@@ -1,0 +1,9 @@
+{
+  "name": "sysreport",
+  "version": "1.0.0",
+  "description": "Ultimate Linux Server Audit CLI",
+  "license": "MIT",
+  "bin": {
+    "sysreport": "./scripts/sysreport.sh"
+  }
+}

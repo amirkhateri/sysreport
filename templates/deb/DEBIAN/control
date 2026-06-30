@@ -1,0 +1,7 @@
+Package: sysreport
+Version: @VERSION@
+Section: admin
+Priority: optional
+Architecture: all
+Maintainer: Amir Hossein Khateri
+Description: Ultimate Linux Server Audit CLI
