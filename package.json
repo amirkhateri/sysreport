@@ -1,9 +1,33 @@
 {
   "name": "sysreport",
-  "version": "1.0.0",
-  "description": "Ultimate Linux Server Audit CLI",
+  "version": "1.0.2",
+  "description": "Linux server audit and operations summary CLI",
   "license": "MIT",
+  "author": "Amir Hossein Khateri",
+  "homepage": "https://github.com/amirkhateri/sysreport",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amirkhateri/sysreport.git"
+  },
   "bin": {
-    "sysreport": "./scripts/sysreport.sh"
-  }
+    "sysreport": "./bin/sysreport"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "README.md",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "SECURITY.md",
+    "LICENSE",
+    "VERSION"
+  ],
+  "keywords": [
+    "linux",
+    "server",
+    "audit",
+    "sysadmin",
+    "devops",
+    "monitoring"
+  ]
 }

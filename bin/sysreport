@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+set -o pipefail
+
+resolve_lib_dir() {
+  local bin_dir candidate
+  bin_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd -P)"
+
+  if [[ -n "${SYSREPORT_LIB_DIR:-}" && -f "$SYSREPORT_LIB_DIR/core.sh" ]]; then
+    printf '%s\n' "$SYSREPORT_LIB_DIR"
+    return 0
+  fi
+
+  for candidate in \
+    "$bin_dir/../src/sysreport" \
+    "$bin_dir/../lib/sysreport" \
+    "/usr/local/lib/sysreport" \
+    "/usr/lib/sysreport"; do
+    if [[ -f "$candidate/core.sh" ]]; then
+      printf '%s\n' "$candidate"
+      return 0
+    fi
+  done
+
+  return 1
+}
+
+SYSREPORT_LIB_DIR="$(resolve_lib_dir)" || {
+  echo "sysreport: unable to find runtime files. Set SYSREPORT_LIB_DIR to the sysreport library path." >&2
+  exit 1
+}
+
+# shellcheck source=/dev/null
+source "$SYSREPORT_LIB_DIR/core.sh"
+
+shopt -s nullglob
+for module in "$SYSREPORT_LIB_DIR"/modules/*.sh; do
+  # shellcheck source=/dev/null
+  source "$module"
+done
+shopt -u nullglob
+
+sysreport_main "$@"

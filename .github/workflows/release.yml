@@ -13,9 +13,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Read version
+      - name: Validate
+        run: make check
+
+      - name: Build archive
         run: |
-          echo "VERSION=$(cat VERSION)"
+          version="$(cat VERSION)"
+          archive="sysreport-${version}"
+          mkdir -p "dist/${archive}/bin" "dist/${archive}/src/sysreport" "dist/${archive}/scripts/install"
+          cp -R bin/sysreport "dist/${archive}/bin/"
+          cp -R src/sysreport/core.sh src/sysreport/modules "dist/${archive}/src/sysreport/"
+          cp scripts/install/install.sh scripts/install/uninstall.sh "dist/${archive}/scripts/install/"
+          cp README.md LICENSE CHANGELOG.md CONTRIBUTING.md SECURITY.md VERSION package.json nfpm.yaml "dist/${archive}/"
+          tar -C dist -czf "dist/${archive}.tar.gz" "${archive}"
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version="$(cat VERSION)"
+          gh release create "v${version}" "dist/sysreport-${version}.tar.gz" \
+            --repo "${GITHUB_REPOSITORY}" \
+            --title "SysReport v${version}" \
+            --notes-file CHANGELOG.md

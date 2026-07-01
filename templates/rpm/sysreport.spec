@@ -1,7 +1,7 @@
 Name:           sysreport
 Version:        @VERSION@
 Release:        1%{?dist}
-Summary:        Ultimate Linux Server Audit CLI
+Summary:        Linux server audit and operations summary CLI
 
 License:        MIT
 URL:            https://github.com/amirkhateri/sysreport
@@ -10,10 +10,10 @@ BuildArch:      noarch
 
 Source0:        %{name}-%{version}.tar.gz
 
-Requires: bash
+Requires:       bash
 
 %description
-Ultimate Linux Server Audit CLI
+Linux server audit and operations summary CLI.
 
 %prep
 
@@ -21,12 +21,17 @@ Ultimate Linux Server Audit CLI
 
 %install
 
-mkdir -p %{buildroot}/usr/local/bin
+mkdir -p %{buildroot}/usr/bin
+mkdir -p %{buildroot}/usr/lib/%{name}/modules
 
-install -m 755 scripts/sysreport.sh %{buildroot}/usr/local/bin/sysreport
+install -m 755 bin/sysreport %{buildroot}/usr/bin/sysreport
+install -m 644 src/sysreport/core.sh %{buildroot}/usr/lib/%{name}/core.sh
+install -m 644 src/sysreport/modules/*.sh %{buildroot}/usr/lib/%{name}/modules/
 
 %files
 
-/usr/local/bin/sysreport
+/usr/bin/sysreport
+/usr/lib/%{name}/core.sh
+/usr/lib/%{name}/modules/*.sh
 
 %changelog

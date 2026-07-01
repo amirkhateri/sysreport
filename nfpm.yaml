@@ -1,0 +1,21 @@
+name: sysreport
+version: "${VERSION}"
+arch: all
+platform: linux
+maintainer: Amir Hossein Khateri <khateri.amirhossein@gmail.com>
+description: Linux server audit and operations summary CLI
+license: MIT
+homepage: https://github.com/amirkhateri/sysreport
+contents:
+  - src: bin/sysreport
+    dst: /usr/bin/sysreport
+    file_info:
+      mode: 0755
+  - src: src/sysreport/core.sh
+    dst: /usr/lib/sysreport/core.sh
+    file_info:
+      mode: 0644
+  - src: src/sysreport/modules
+    dst: /usr/lib/sysreport/modules
+    file_info:
+      mode: 0644

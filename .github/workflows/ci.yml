@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  shell:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Syntax check
+        run: make check
+
+      - name: Smoke test
+        run: |
+          bash bin/sysreport --version
+          bash bin/sysreport --list-sections
+          bash bin/sysreport --section system --no-color

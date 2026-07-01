@@ -2,7 +2,16 @@ VERSION := $(shell cat VERSION)
 NAME := sysreport
 
 run:
-	bash scripts/sysreport.sh
+	bash bin/sysreport
+
+help:
+	bash bin/sysreport --help
+
+sections:
+	bash bin/sysreport --list-sections
+
+check:
+	bash -n bin/sysreport scripts/sysreport.sh src/sysreport/core.sh src/sysreport/modules/*.sh
 
 version:
 	@echo $(VERSION)
