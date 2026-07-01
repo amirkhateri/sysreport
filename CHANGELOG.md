@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.0
+
+- Rebuilt SysReport as a modular CLI with a small launcher and reusable report modules.
+- Added CI smoke tests and GitHub release archive automation.
+- Added public project docs: README, contributing guide, security policy, license, and packaging metadata.
+- Added safer runtime behavior for public use: report-only execution, section filtering, and graceful skips for missing tools.
+
 ## 1.0.2
 
 - Refactored the CLI into a modular runtime under `src/sysreport/`.
