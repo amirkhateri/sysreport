@@ -10,8 +10,39 @@ report_security_port() {
   fi
 }
 
+report_security_unit() {
+  local label="$1" unit="$2" status
+
+  if ! sysreport_have systemctl; then
+    return 1
+  fi
+
+  if ! systemctl list-unit-files --no-legend "$unit" 2>/dev/null | grep -q . && \
+    ! systemctl list-units --no-legend "$unit" 2>/dev/null | grep -q .; then
+    return 1
+  fi
+
+  status="$(systemctl is-active "$unit" 2>/dev/null || true)"
+  case "$status" in
+    active)
+      sysreport_ok "$label active ($unit)"
+      ;;
+    failed)
+      sysreport_fail "$label installed but failed ($unit)"
+      ;;
+    inactive|deactivating|activating)
+      sysreport_warn "$label installed but $status ($unit)"
+      ;;
+    *)
+      sysreport_warn "$label installed but status is ${status:-unknown} ($unit)"
+      ;;
+  esac
+
+  return 0
+}
+
 report_security() {
-  local ssh_config ssh_port root_login password_auth firewall_state
+  local ssh_config ssh_port root_login password_auth found_security_unit
 
   sysreport_section "Security"
 
@@ -28,18 +59,15 @@ report_security() {
   [[ "${root_login:-}" == "yes" ]] && sysreport_warn "PermitRootLogin is enabled" || sysreport_ok "PermitRootLogin is not explicitly enabled"
   sysreport_item "SSH password auth" "${password_auth:-default}"
 
-  if sysreport_have systemctl; then
-    if systemctl is-active --quiet firewalld 2>/dev/null; then
-      firewall_state="firewalld active"
-    elif systemctl is-active --quiet ufw 2>/dev/null; then
-      firewall_state="ufw active"
-    elif systemctl is-active --quiet csf 2>/dev/null; then
-      firewall_state="csf active"
-    else
-      firewall_state="no common firewall service active"
-    fi
-    sysreport_item "Firewall" "$firewall_state"
-  fi
+  printf '\n'
+  sysreport_item "Firewall and hardening services" ""
+  found_security_unit=0
+  report_security_unit "CSF firewall" "csf.service" && found_security_unit=1
+  report_security_unit "LFD login failure daemon" "lfd.service" && found_security_unit=1
+  report_security_unit "Imunify360" "imunify360.service" && found_security_unit=1
+  report_security_unit "firewalld" "firewalld.service" && found_security_unit=1
+  report_security_unit "ufw" "ufw.service" && found_security_unit=1
+  [[ "$found_security_unit" -eq 0 ]] && sysreport_unknown "no common firewall or hardening service detected"
 
   if sysreport_have fail2ban-client; then
     sysreport_item "Fail2ban" "$(fail2ban-client ping 2>/dev/null | tr '\n' ' ' || echo detected)"

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.2
+
+- Improved WHM/cPanel output formatting for PHP-FPM units.
+- Added CSF, LFD, Imunify360, firewalld, and ufw service status checks.
+- Kept `--no-color` output clean by suppressing fastfetch's colored block.
+
 ## 1.1.1
 
 - Fixed installed CLI version detection by installing `VERSION` with the runtime files.

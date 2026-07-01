@@ -40,7 +40,12 @@ report_webstack() {
 
   if sysreport_have systemctl; then
     fpm_services="$(systemctl list-units --type=service --no-legend 2>/dev/null | awk '/php.*fpm|ea-php.*fpm/ {print $1 " " $4}' | head -n 20)"
-    sysreport_item "PHP-FPM units" "${fpm_services:-none detected}"
+    sysreport_item "PHP-FPM units" ""
+    if [[ -n "$fpm_services" ]]; then
+      printf '%s\n' "$fpm_services" | awk '{print "  " $1 ": " $2}'
+    else
+      sysreport_unknown "none detected"
+    fi
   fi
 
   if [[ -x /usr/local/cpanel/cpanel ]]; then

@@ -23,7 +23,7 @@ report_system() {
   sysreport_item "Swap" "${swap_line:-unknown}"
   sysreport_item "Root filesystem" "${root_usage:-unknown}"
 
-  if sysreport_have fastfetch; then
+  if sysreport_have fastfetch && sysreport_use_color; then
     printf '\n'
     fastfetch --pipe false 2>/dev/null || true
   fi
