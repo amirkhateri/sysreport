@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.1
+
+- Fixed installed CLI version detection by installing `VERSION` with the runtime files.
+- Included `VERSION` in nFPM and RPM package layouts.
+
 ## 1.1.0
 
 - Rebuilt SysReport as a modular CLI with a small launcher and reusable report modules.

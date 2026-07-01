@@ -2,13 +2,15 @@
 
 SYSREPORT_NAME="sysreport"
 SYSREPORT_DESCRIPTION="Linux server audit and operations summary"
-SYSREPORT_VERSION="${SYSREPORT_VERSION:-1.0.0}"
+SYSREPORT_VERSION="${SYSREPORT_VERSION:-dev}"
 
 if [[ -z "${SYSREPORT_ROOT:-}" ]]; then
   SYSREPORT_ROOT="$(cd -- "${SYSREPORT_LIB_DIR:-$(pwd)}/../.." >/dev/null 2>&1 && pwd -P)"
 fi
 
-if [[ -f "$SYSREPORT_ROOT/VERSION" ]]; then
+if [[ -n "${SYSREPORT_LIB_DIR:-}" && -f "$SYSREPORT_LIB_DIR/VERSION" ]]; then
+  SYSREPORT_VERSION="$(tr -d '[:space:]' < "$SYSREPORT_LIB_DIR/VERSION")"
+elif [[ -f "$SYSREPORT_ROOT/VERSION" ]]; then
   SYSREPORT_VERSION="$(tr -d '[:space:]' < "$SYSREPORT_ROOT/VERSION")"
 fi
 

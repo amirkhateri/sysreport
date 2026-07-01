@@ -26,12 +26,14 @@ mkdir -p %{buildroot}/usr/lib/%{name}/modules
 
 install -m 755 bin/sysreport %{buildroot}/usr/bin/sysreport
 install -m 644 src/sysreport/core.sh %{buildroot}/usr/lib/%{name}/core.sh
+install -m 644 VERSION %{buildroot}/usr/lib/%{name}/VERSION
 install -m 644 src/sysreport/modules/*.sh %{buildroot}/usr/lib/%{name}/modules/
 
 %files
 
 /usr/bin/sysreport
 /usr/lib/%{name}/core.sh
+/usr/lib/%{name}/VERSION
 /usr/lib/%{name}/modules/*.sh
 
 %changelog

@@ -15,6 +15,10 @@ contents:
     dst: /usr/lib/sysreport/core.sh
     file_info:
       mode: 0644
+  - src: VERSION
+    dst: /usr/lib/sysreport/VERSION
+    file_info:
+      mode: 0644
   - src: src/sysreport/modules
     dst: /usr/lib/sysreport/modules
     file_info:
