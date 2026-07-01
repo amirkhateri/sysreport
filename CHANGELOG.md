@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.3
+
+- Fixed npm global installs by resolving symlinked CLI launchers before locating runtime files.
+- Prepared npm metadata and GitHub release packaging for RPM/Debian artifacts.
+- Ensured RPM/Debian packages own runtime directories so package removal is clean.
+
 ## 1.1.2
 
 - Improved WHM/cPanel output formatting for PHP-FPM units.

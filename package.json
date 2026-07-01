@@ -1,8 +1,11 @@
 {
   "name": "sysreport",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Linux server audit and operations summary CLI",
   "license": "MIT",
+  "os": [
+    "linux"
+  ],
   "author": "Amir Hossein Khateri",
   "homepage": "https://github.com/amirkhateri/sysreport",
   "repository": {
@@ -10,7 +13,11 @@
     "url": "git+https://github.com/amirkhateri/sysreport.git"
   },
   "bin": {
-    "sysreport": "./bin/sysreport"
+    "sysreport": "bin/sysreport"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "files": [
     "bin/",

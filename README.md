@@ -34,7 +34,22 @@ sysreport
 
 ### Debian / Ubuntu and RPM
 
-Package templates are available under `templates/`. The project is structured so release automation can publish `.deb` and `.rpm` artifacts.
+Download packages from the GitHub release page, or install the RPM directly with `dnf`:
+
+```bash
+VERSION=1.1.3
+sudo dnf install -y "https://github.com/amirkhateri/sysreport/releases/download/v${VERSION}/sysreport-${VERSION}-1.noarch.rpm"
+```
+
+Debian/Ubuntu users can install the `.deb` package from the same release:
+
+```bash
+VERSION=1.1.3
+curl -LO "https://github.com/amirkhateri/sysreport/releases/download/v${VERSION}/sysreport_${VERSION}_all.deb"
+sudo apt install ./sysreport_${VERSION}_all.deb
+```
+
+Package templates are available under `templates/`, and release automation publishes `.deb` and `.rpm` artifacts.
 
 For GitHub releases, download the `sysreport-<version>.tar.gz` archive, extract it, and run the installer:
 

@@ -11,6 +11,14 @@ contents:
     dst: /usr/bin/sysreport
     file_info:
       mode: 0755
+  - dst: /usr/lib/sysreport
+    type: dir
+    file_info:
+      mode: 0755
+  - dst: /usr/lib/sysreport/modules
+    type: dir
+    file_info:
+      mode: 0755
   - src: src/sysreport/core.sh
     dst: /usr/lib/sysreport/core.sh
     file_info:

@@ -3,8 +3,16 @@
 set -o pipefail
 
 resolve_lib_dir() {
-  local bin_dir candidate
-  bin_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd -P)"
+  local source bin_dir candidate
+  source="${BASH_SOURCE[0]}"
+
+  while [[ -L "$source" ]]; do
+    bin_dir="$(cd -- "$(dirname -- "$source")" >/dev/null 2>&1 && pwd -P)"
+    source="$(readlink "$source")"
+    [[ "$source" != /* ]] && source="$bin_dir/$source"
+  done
+
+  bin_dir="$(cd -- "$(dirname -- "$source")" >/dev/null 2>&1 && pwd -P)"
 
   if [[ -n "${SYSREPORT_LIB_DIR:-}" && -f "$SYSREPORT_LIB_DIR/core.sh" ]]; then
     printf '%s\n' "$SYSREPORT_LIB_DIR"

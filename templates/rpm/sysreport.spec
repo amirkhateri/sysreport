@@ -32,6 +32,8 @@ install -m 644 src/sysreport/modules/*.sh %{buildroot}/usr/lib/%{name}/modules/
 %files
 
 /usr/bin/sysreport
+%dir /usr/lib/%{name}
+%dir /usr/lib/%{name}/modules
 /usr/lib/%{name}/core.sh
 /usr/lib/%{name}/VERSION
 /usr/lib/%{name}/modules/*.sh
