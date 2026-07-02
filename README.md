@@ -41,6 +41,14 @@ VERSION=1.1.3
 sudo dnf install -y "https://github.com/amirkhateri/sysreport/releases/download/v${VERSION}/sysreport-${VERSION}-1.noarch.rpm"
 ```
 
+You can also enable the COPR repository:
+
+```bash
+sudo dnf install -y dnf-plugins-core
+sudo dnf copr enable khateri/sysreport
+sudo dnf install -y sysreport
+```
+
 Debian/Ubuntu users can install the `.deb` package from the same release:
 
 ```bash
