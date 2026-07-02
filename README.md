@@ -1,5 +1,18 @@
 # SysReport
 
+[![npm version](https://img.shields.io/npm/v/sysreport?logo=npm&color=cb3837)](https://www.npmjs.com/package/sysreport)
+[![npm downloads](https://img.shields.io/npm/dm/sysreport?logo=npm&color=cb3837)](https://www.npmjs.com/package/sysreport)
+[![GitHub release](https://img.shields.io/github/v/release/amirkhateri/sysreport?logo=github&color=2ea44f)](https://github.com/amirkhateri/sysreport/releases)
+[![CI](https://github.com/amirkhateri/sysreport/actions/workflows/ci.yml/badge.svg)](https://github.com/amirkhateri/sysreport/actions/workflows/ci.yml)
+[![Release](https://github.com/amirkhateri/sysreport/actions/workflows/release.yml/badge.svg)](https://github.com/amirkhateri/sysreport/actions/workflows/release.yml)
+[![COPR](https://img.shields.io/badge/COPR-khateri%2Fsysreport-3c6eb4?logo=fedora)](https://copr.fedorainfracloud.org/coprs/khateri/sysreport/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Shell](https://img.shields.io/badge/shell-bash-4EAA25?logo=gnubash&logoColor=white)](bin/sysreport)
+[![Linux](https://img.shields.io/badge/platform-linux-FCC624?logo=linux&logoColor=black)](README.md)
+[![dnf](https://img.shields.io/badge/install-dnf-294172?logo=fedora&logoColor=white)](#debian--ubuntu-and-rpm)
+[![apt](https://img.shields.io/badge/install-apt-A81D33?logo=debian&logoColor=white)](#debian--ubuntu-and-rpm)
+[![GitHub stars](https://img.shields.io/github/stars/amirkhateri/sysreport?style=social)](https://github.com/amirkhateri/sysreport/stargazers)
+
 SysReport is a lightweight Linux server audit CLI for sysadmins, DevOps engineers, and hosting operators. Run one command and get a practical summary of the server's health, identity, network, web stack, databases, security posture, and optimization signals.
 
 ```bash
@@ -15,6 +28,8 @@ sysreport
 - Friendly to package managers: npm, deb/rpm layouts, and manual install scripts are included.
 
 ## Installation
+
+Install from npm, COPR, GitHub Releases, or directly from source.
 
 ### Manual
 
